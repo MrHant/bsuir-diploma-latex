@@ -51,6 +51,10 @@
 \setstretch{1.1}
 %\onehalfspacing
 
+% Зачем: Определяем пробельную строку
+\newlength{\blankline}
+\setlength{\blackline}{20pt}
+
 % Зачем: Выбор шрифта по-умолчанию. 
 % Почему: Пункт 2.1.1 Требований по оформлению пояснительной записки.
 % Примечание: В требованиях не указан, какой именно шрифт использовать. По традиции используем TNR.
@@ -196,8 +200,8 @@
 \DeclareCaptionLabelFormat{stbtable}{Таблица #2}
 \DeclareCaptionLabelSeparator{stb}{~--~}
 \captionsetup{labelsep=stb}
-\captionsetup[figure]{labelformat=stbfigure,justification=centering}
-\captionsetup[table]{labelformat=stbtable,justification=raggedright}
+\captionsetup[figure]{labelformat=stbfigure,justification=centering,aboveskip=\blankline}
+\captionsetup[table]{labelformat=stbtable,justification=raggedright,aboveskip=0pt}
 \renewcommand{\thesubfigure}{\asbuk{subfigure}}
 
 
