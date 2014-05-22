@@ -209,6 +209,57 @@
 \usepackage{amsmath}
 
 
+% Зачем: Формулы должны отделяться от текста пробельными строками
+% Почему: Пункт 2.4.3 требований по оформлению пояснительной записки
+
+% Хак - пропуск размером с пробельную строку до и после формул
+% источник - http://tex.stackexchange.com/questions/21760/a-problem-about-xxxdisplayskip
+\def\aboveconstskip{\par\hrule height 0pt \nobreak\vskip -\baselineskip
+    \noindent \hbox to \hsize{\hfill \vrule width 0pt depth 0pt}
+    \vspace{\blankline}
+    }
+\def\belowconstskip{\par\hrule height 0pt \vskip -\ht\strutbox \vskip \blankline 
+    \noindent\vrule width 0pt height \ht\strutbox
+    \nolinebreak
+    }
+
+% Установка отступов для формул в 0pt
+\def\displayskipzero{
+    \setlength{\abovedisplayskip}{0pt}
+    \setlength{\belowdisplayskip}{0pt}
+    \setlength{\abovedisplayshortskip}{0pt}
+    \setlength{\belowdisplayshortskip}{0pt}
+}
+
+% Переопределение однострочных формул
+\let\oldequation=\equation
+\let\endoldequation=\endequation
+\renewenvironment{equation}
+    {
+    \displayskipzero
+    \aboveconstskip
+    \begin{oldequation}
+    }
+    {
+    \end{oldequation}
+    \belowconstskip
+    }
+
+% Переопределение многострочных формул
+\let\oldalign=\align
+\let\endoldalign=\endalign
+\renewenvironment{align}
+    {
+    \displayskipzero
+    \aboveconstskip
+    \oldalign
+    }
+    {
+    \endoldalign
+    \belowconstskip
+    }
+
+
 % Зачем: Поддержка ажурного и готического шрифтов 
 \usepackage{amsfonts}
 
